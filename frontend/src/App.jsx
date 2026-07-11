@@ -1,122 +1,148 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { useState } from "react";
+
+const themes = [
+  "light",
+  "dark",
+  "cupcake",
+  "bumblebee",
+  "emerald",
+  "corporate",
+  "synthwave",
+  "retro",
+  "cyberpunk",
+  "valentine",
+  "halloween",
+  "garden",
+  "forest",
+  "aqua",
+  "lofi",
+  "pastel",
+  "fantasy",
+  "wireframe",
+  "black",
+  "luxury",
+  "dracula",
+  "cmyk",
+  "autumn",
+  "business",
+  "acid",
+  "lemonade",
+  "night",
+  "coffee",
+  "winter",
+  "dim",
+  "nord",
+  "sunset",
+];
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [theme, setTheme] = useState("coffee");
+
+  const changeTheme = (e) => {
+    const selectedTheme = e.target.value;
+    setTheme(selectedTheme);
+    document.documentElement.setAttribute("data-theme", selectedTheme);
+  };
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
+    <div className="min-h-screen bg-base-200">
+      {/* Navbar */}
+      <div className="navbar bg-base-100 shadow-md px-8">
+        <div className="flex-1">
+          <a className="text-2xl font-bold text-primary">
+            💬 Chatify
+          </a>
         </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
 
-      <div className="ticks"></div>
+        <div className="flex items-center gap-3">
+          <select
+            className="select select-bordered"
+            value={theme}
+            onChange={changeTheme}
+          >
+            {themes.map((theme) => (
+              <option key={theme}>{theme}</option>
+            ))}
+          </select>
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
+          <button className="btn btn-ghost">Login</button>
+          <button className="btn btn-primary">Sign Up</button>
         </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+      </div>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+      {/* Hero */}
+      <div className="hero min-h-[85vh]">
+        <div className="hero-content flex-col lg:flex-row-reverse gap-20">
+
+          <div className="mockup-window bg-base-300 border shadow-xl w-[380px]">
+            <div className="bg-base-200 p-5 space-y-4">
+
+              <div className="chat chat-start">
+                <div className="chat-bubble">
+                  Hey 👋
+                </div>
+              </div>
+
+              <div className="chat chat-end">
+                <div className="chat-bubble chat-bubble-primary">
+                  Hi! What's up?
+                </div>
+              </div>
+
+              <div className="chat chat-start">
+                <div className="chat-bubble">
+                  Building Chatify 🚀
+                </div>
+              </div>
+
+              <div className="chat chat-end">
+                <div className="chat-bubble chat-bubble-primary">
+                  Looks Awesome 🔥
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div className="max-w-xl">
+            <h1 className="text-6xl font-bold">
+              Connect with
+              <span className="text-primary"> Anyone.</span>
+            </h1>
+
+            <p className="py-6 text-lg">
+              A modern realtime messaging platform built with
+              React, Node.js, Express, MongoDB and Socket.IO.
+            </p>
+
+            <div className="flex gap-4">
+              <button className="btn btn-primary btn-lg">
+                Get Started
+              </button>
+
+              <button className="btn btn-outline btn-lg">
+                Learn More
+              </button>
+            </div>
+
+            <div className="stats shadow mt-10">
+              <div className="stat">
+                <div className="stat-title">Users</div>
+                <div className="stat-value text-primary">5K+</div>
+              </div>
+
+              <div className="stat">
+                <div className="stat-title">Messages</div>
+                <div className="stat-value">1M+</div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  );
 }
 
-export default App
+export default App;

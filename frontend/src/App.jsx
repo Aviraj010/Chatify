@@ -1,30 +1,66 @@
-import React from 'react'
-import Navbar from './components/Navbar'
+import { useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
+import { Loader } from "lucide-react";
 
-import {Routes, Route} from 'react-router-dom'
+import Navbar from "./components/Navbar";
 
-import HomePage from './pages/Homepage'
-import SignUpPage from './pages/SignUpPage'
-import LoginPage from './pages/LoginPage'
-import SettingsPage from './pages/SettingsPage'
-import ProfilePage from './pages/ProfilePage'
+import HomePage from "./pages/HomePage";
+import SignUpPage from "./pages/SignUpPage";
+import LoginPage from "./pages/LoginPage";
+import SettingsPage from "./pages/SettingsPage";
+import ProfilePage from "./pages/ProfilePage";
 
-import useAuthStore from './store/useAuthStore'
-
+import useAuthStore from "./store/useAuthStore";
 
 function App() {
+  const { authUser, checkAuth, isCheckingAuth } = useAuthStore();
+
+  useEffect(() => {
+    checkAuth();
+  }, [checkAuth]);
+
+  console.log("authUser:", authUser);
+
+  if (isCheckingAuth && !authUser) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <Loader className="size-10 animate-spin" />
+      </div>
+    );
+  }
+
   return (
     <div>
       <Navbar />
+
       <Routes>
-        <Route path="/" element={<HomePage />} />
-         <Route path="/signup" element={<SignUpPage />} />
-         <Route path="/login" element={<LoginPage />} />
-         <Route path="/settings" element={<SettingsPage />} />
-         <Route path="/profile" element={<ProfilePage />} />
+        <Route
+          path="/"
+          element={authUser ? <HomePage /> : <LoginPage />}
+        />
+
+        <Route
+          path="/signup"
+          element={!authUser ? <SignUpPage /> : <HomePage />}
+        />
+
+        <Route
+          path="/login"
+          element={!authUser ? <LoginPage /> : <HomePage />}
+        />
+
+        <Route
+          path="/settings"
+          element={authUser ? <SettingsPage /> : <LoginPage />}
+        />
+
+        <Route
+          path="/profile"
+          element={authUser ? <ProfilePage /> : <LoginPage />}
+        />
       </Routes>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
